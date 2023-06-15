@@ -1,0 +1,85 @@
+﻿<!--This page allows user to view specific VideoGame details-->
+@model NETD3202_Lab5_V3.Models.VideoGame
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Details";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <div>
+        <h4>@Html.DisplayFor(model => model.gameName) Details</h4>
+        <hr />
+        <dl>
+            <dt>
+                Game ID
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.gameID)
+            </dd>
+            <dt>
+                Release Year
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.releaseYear)
+            </dd>
+            <dt>
+                ESRB
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.esrb)
+            </dd>
+            <dt>
+                Rating
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.rating)
+            </dd>
+        </dl>
+        <hr />
+    </div>
+    <div>
+        <a style="color: black" asp-action="Edit" asp-route-id="@Model.gameID">Edit</a>&nbsp;&nbsp;
+        <a style="color: black" asp-controller="MoreDetails" asp-action="Details" asp-route-id="@Model.gameID">More Details</a>&nbsp;&nbsp;
+        <a style="color: black" asp-action="Index">Back to List</a>
+    </div>
+}
+else
+{
+    <div>
+        <h4>@Html.DisplayFor(model => model.gameName) Details</h4>
+        <hr />
+        <dl>
+            <dt>
+                Game ID
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.gameID)
+            </dd>
+            <dt>
+                Release Year
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.releaseYear)
+            </dd>
+            <dt>
+                ESRB
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.esrb)
+            </dd>
+            <dt>
+                Rating
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.rating)
+            </dd>
+        </dl>
+        <hr />
+    </div>
+    <div>
+        <a style="color: black" asp-controller="MoreDetails" asp-action="Details" asp-route-id="@Model.gameID">More Details</a>&nbsp;&nbsp;
+        <a style="color: black" asp-action="Index">Back to List</a>
+    </div>
+}

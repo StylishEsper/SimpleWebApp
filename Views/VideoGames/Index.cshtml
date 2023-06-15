@@ -1,0 +1,109 @@
+﻿<!--This page allows user to view the list of VideoGame objects-->
+@model IEnumerable<NETD3202_Lab5_V3.Models.VideoGame>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Video Game List";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+        <h1>Video Game List</h1>
+
+        <p>
+            <a style="color: black" asp-action="Create">Add New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Game Name
+                    </th>
+                    <th>
+                        Release Year
+                    </th>
+                    <th>
+                        ESRB
+                    </th>
+                    <th>
+                        Rating
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gameName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.releaseYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.esrb)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </td>
+                        <td>
+                            <a style="color: black" asp-action="Edit" asp-route-id="@item.gameID">Edit</a> |
+                            <a style="color: black" asp-action="Details" asp-route-id="@item.gameID">Details</a> |
+                            <a style="color: black" asp-action="Delete" asp-route-id="@item.gameID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p class="lead">
+            <a asp-controller="MoreDetails" asp-action="Index" class="btn btn-lg btn-secondary">Additional Details List</a>
+        </p>
+}
+else
+{
+        <h1>Video Game List</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Game Name
+                    </th>
+                    <th>
+                        Release Year
+                    </th>
+                    <th>
+                        ESRB
+                    </th>
+                    <th>
+                        Rating
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gameName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.releaseYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.esrb)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.rating)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p class="lead">
+            <a asp-controller="MoreDetails" asp-action="Index" class="btn btn-lg btn-secondary">Additional Details List</a>
+        </p>
+}

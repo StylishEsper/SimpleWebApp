@@ -1,0 +1,69 @@
+﻿<!--This page allows user to input information to create a new VideoGame object-->
+@model NETD3202_Lab5_V3.Models.VideoGame
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Create";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <h4>Add Video Game</h4>
+    <hr />
+    <div>
+        <div style="margin-left: 30%; margin-right: 30%">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="gameName" class="control-label">Game Name</label>
+                    <input asp-for="gameName" class="form-control" placeholder="e.g. Pokémon" />
+                    <span asp-validation-for="gameName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="releaseYear" class="control-label">Release Year</label>
+                    <input asp-for="releaseYear" class="form-control" placeholder="e.g. 1996" />
+                    <span asp-validation-for="releaseYear" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="esrb" class="control-label">ESRB</label>
+                    <input asp-for="esrb" class="form-control" placeholder="" />
+                    <span asp-validation-for="esrb" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="rating" class="control-label">Your Rating</label>
+                    <select asp-for="rating" class="form-control">
+                        <option disabled>Select a Rating</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <span asp-validation-for="rating" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a style="color: black" asp-action="Index">Back to List</a>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+}
+else
+{
+    <h1 class="display-4">Oops!</h1>
+    <hr />
+    <p class="lead">
+        You don't have access to this page. Are you logged in?
+    </p>
+
+    <p class="lead">
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-lg btn-secondary">Login</a>
+    </p>
+}

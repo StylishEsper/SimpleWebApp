@@ -1,0 +1,55 @@
+﻿<!--This page allows user to view the edit an existing MoreDetail objects-->
+@model NETD3202_Lab5_V3.Models.MoreDetail
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Edit";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <h4>Edit Video Game</h4>
+    <hr />
+    <div>
+        <div style="margin-left: 30%; margin-right: 30%">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="gID" />
+                <div class="form-group">
+                    <label asp-for="gID" class="control-label">Game ID</label>
+                    <input asp-for="gID" class="form-control" value="@Model.gID" disabled />
+                    <span asp-validation-for="gID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="description" class="control-label">Description</label>
+                    <textarea asp-for="description" class="form-control" placeholder="Storyline, concept, etc.">
+                    </textarea>
+                    <span asp-validation-for="description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a style="color: black" asp-controller="VideoGames" asp-action="Index">Video Game List</a>&nbsp;&nbsp;
+        <a style="color: black" asp-action="Index">More Details List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+}
+else
+{
+    <h1 class="display-4">Oops!</h1>
+    <hr />
+    <p class="lead">
+        You don't have access to this page. Are you logged in?
+    </p>
+
+    <p class="lead">
+        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-lg btn-secondary">Login</a>
+    </p>
+}
