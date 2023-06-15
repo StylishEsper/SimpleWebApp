@@ -12,8 +12,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "VaultUri": "https://netd3202lab5v3vault.vault.azure.net/",
-        "AZURE_USERNAME": "TypicalNewb@outlook.com",
+        "VaultUri": "1",
+        "AZURE_USERNAME": "1",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
